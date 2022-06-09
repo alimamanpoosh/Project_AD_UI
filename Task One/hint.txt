@@ -1,0 +1,1 @@
+this taks is very similar to 8 queen problem
