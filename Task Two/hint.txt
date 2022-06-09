@@ -1,0 +1,5 @@
+we can for shorted path use this links:
+https://www.geeksforgeeks.org/building-an-undirected-graph-and-finding-shortest-path-using-dictionaries-in-python/
+https://www.geeksforgeeks.org/python-program-for-dijkstras-shortest-path-algorithm-greedy-algo-7/
+
+I think use Diconary is optimal
