@@ -1,0 +1,5 @@
+http://www.righto.com/2010/12/solving-edge-match-puzzles-with-arc-and.html
+https://gsurma.medium.com/sliding-puzzle-solving-search-problem-with-iterative-deepening-a-d7e8c14eba04
+https://www.101computing.net/rush-hour-backtracking-algorithm/
+https://www.geeksforgeeks.org/8-puzzle-problem-using-branch-and-bound/
+https://www.youtube.com/watch?v=-7zxQzs3D2A      
