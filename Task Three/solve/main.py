@@ -26,7 +26,7 @@ class Graph:
         for i in range(self.m_num_of_nodes):
             print(self.m_graph[i])
 
-        print(selected_nodes)
+        # print(selected_nodes)
 
         # While there are nodes that are not included in the MST, keep looking:
         while (False in selected_nodes):
@@ -60,17 +60,20 @@ class Graph:
             if minimum == postitive_inf:
                 result[start][end] = 0
 
-            print("(%d.) %d - %d: %d" % (indx, start, end, result[start][end]))
+            # print("(%d.) %d - %d: %d" % (indx, start, end, result[start][end]))
             indx += 1
 
             result[end][start] = result[start][end]
 
         # Print the resulting MST
         # for node1, node2, weight in result:
+        sum_result = 0
         for i in range(len(result)):
             for j in range(0 + i, len(result)):
                 if result[i][j] != 0:
                     print("%d - %d: %d" % (i, j, result[i][j]))
+                    sum_result += result[i][j]
+        print("path length  =  ",sum_result)
 
 # Example graph has 9 nodes
 example_graph = Graph(10)
