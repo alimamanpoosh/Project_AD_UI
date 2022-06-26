@@ -5,28 +5,28 @@ class Graph:
         self.m_graph = [[0 for column in range(num_of_nodes)] 
                     for row in range(num_of_nodes)]
 
+
+    #create adjacency matrix
     def add_edge(self, node1, node2, weight):
         self.m_graph[node1][node2] = weight
         self.m_graph[node2][node1] = weight
 
 
     def prims_mst(self):
-        # Defining a really big number, that'll always be the highest weight in comparisons
+        # Defining a really big number
         postitive_inf = float('inf')
 
-        # This is a list showing which nodes are already selected
-        # so we don't pick the same node twice and we can actually know when stop looking
         selected_nodes = [False for node in range(self.m_num_of_nodes)]
 
-        # Matrix of the resulting MST
+        #array 2d init all elemnt  0
         result = [[0 for column in range(self.m_num_of_nodes)]
                   for row in range(self.m_num_of_nodes)]
 
         indx = 0
+        # print adjacency matrix
         for i in range(self.m_num_of_nodes):
             print(self.m_graph[i])
 
-        # print(selected_nodes)
 
         # While there are nodes that are not included in the MST, keep looking:
         while (False in selected_nodes):
@@ -44,6 +44,7 @@ class Graph:
                 if selected_nodes[i]:
                     for j in range(self.m_num_of_nodes):
                         # If the analyzed node have a path to the ending node AND its not included in the MST (to avoid cycles)
+                        # avoid cycles
                         if (not selected_nodes[j] and self.m_graph[i][j] > 0):
                             # If the weight path analized is less than the minimum of the MST
                             if self.m_graph[i][j] < minimum:
@@ -60,7 +61,6 @@ class Graph:
             if minimum == postitive_inf:
                 result[start][end] = 0
 
-            # print("(%d.) %d - %d: %d" % (indx, start, end, result[start][end]))
             indx += 1
 
             result[end][start] = result[start][end]
@@ -75,7 +75,7 @@ class Graph:
                     sum_result += result[i][j]
         print("path length  =  ",sum_result)
 
-# Example graph has 9 nodes
+# Example graph has 10 nodes
 example_graph = Graph(10)
 
 example_graph.add_edge(0, 1, 3)
