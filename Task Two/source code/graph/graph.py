@@ -137,6 +137,31 @@ class WeightedGraph:
 
         return p
 
+    def has_cycle(self):
+        visited = set()
+        for node in self.nodes.values():
+            if node not in visited:
+                if self.__has_cycle(node, None, visited):
+                    return True
+        return False
+
+    def __has_cycle(self, node: Node, parent: Node, visited: set):
+
+        visited.add(node)
+
+        for edge in node.edges:
+
+            if edge.to_node == parent:
+                continue
+
+            if edge.to_node in visited:
+                return True
+
+            if self.__has_cycle(edge.to_node, node, visited):
+                return True
+
+        return False
+
     def print_graph(self):
         for node in self.nodes.values():
             s = ""
