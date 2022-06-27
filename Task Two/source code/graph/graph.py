@@ -128,7 +128,7 @@ class WeightedGraph:
                     distances[edge.to_node] = new_distance
                     queue.put((new_distance, edge.to_node))
 
-        return distances.get(self.nodes.get(to_node))
+        return distances.get(to_node)
 
     def get_shortest_path(self, from_node, to_node):
         from_node: Node = self.nodes.get(from_node)
