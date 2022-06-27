@@ -170,6 +170,23 @@ class WeightedGraph:
         return WeightedGraph.__build_path(previous, to_node)
 
     @classmethod
+    def get_all_shortest_path(cls, graph, source: str, destination: str):
+        wg: WeightedGraph = deepcopy(graph)
+
+        minimum_path = wg.dijkstra(source, destination)
+
+        while wg.dijkstra(source, destination) == minimum_path and len(wg.nodes) > 2:
+            path = wg.get_shortest_path(source, destination).nodes
+            print(path)
+
+            if source in path and destination in path:
+                path.remove(source)
+                path.remove(destination)
+
+            for ele in path:
+                wg.remove_node(ele)
+
+    @classmethod
     def __build_path(cls, previous: dict, to_node: Node) -> Path:
         stack = [to_node]
         previous_node = previous.get(to_node)
