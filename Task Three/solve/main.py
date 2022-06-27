@@ -5,28 +5,28 @@ class Graph:
         self.m_graph = [[0 for column in range(num_of_nodes)] 
                     for row in range(num_of_nodes)]
 
+
+    #create adjacency matrix
     def add_edge(self, node1, node2, weight):
         self.m_graph[node1][node2] = weight
         self.m_graph[node2][node1] = weight
 
 
     def prims_mst(self):
-        # Defining a really big number, that'll always be the highest weight in comparisons
+        # Defining a really big number
         postitive_inf = float('inf')
 
-        # This is a list showing which nodes are already selected
-        # so we don't pick the same node twice and we can actually know when stop looking
         selected_nodes = [False for node in range(self.m_num_of_nodes)]
 
-        # Matrix of the resulting MST
+        #array 2d init all elemnt  0
         result = [[0 for column in range(self.m_num_of_nodes)]
                   for row in range(self.m_num_of_nodes)]
 
         indx = 0
+        # print adjacency matrix
         for i in range(self.m_num_of_nodes):
             print(self.m_graph[i])
 
-        print(selected_nodes)
 
         # While there are nodes that are not included in the MST, keep looking:
         while (False in selected_nodes):
@@ -44,6 +44,7 @@ class Graph:
                 if selected_nodes[i]:
                     for j in range(self.m_num_of_nodes):
                         # If the analyzed node have a path to the ending node AND its not included in the MST (to avoid cycles)
+                        # avoid cycles
                         if (not selected_nodes[j] and self.m_graph[i][j] > 0):
                             # If the weight path analized is less than the minimum of the MST
                             if self.m_graph[i][j] < minimum:
@@ -60,43 +61,31 @@ class Graph:
             if minimum == postitive_inf:
                 result[start][end] = 0
 
-            print("(%d.) %d - %d: %d" % (indx, start, end, result[start][end]))
             indx += 1
 
             result[end][start] = result[start][end]
 
         # Print the resulting MST
         # for node1, node2, weight in result:
+        sum_result = 0
         for i in range(len(result)):
             for j in range(0 + i, len(result)):
                 if result[i][j] != 0:
                     print("%d - %d: %d" % (i, j, result[i][j]))
+                    sum_result += result[i][j]
+        print("path length  =  ",sum_result)
 
-# Example graph has 9 nodes
-example_graph = Graph(10)
+# Example graph has 10 nodes
+example_graph = Graph(7)
 
-example_graph.add_edge(0, 1, 3)
-example_graph.add_edge(0, 5, 9)
-example_graph.add_edge(0, 3, 6)
-example_graph.add_edge(1, 2, 2)
-example_graph.add_edge(1, 4, 9)
-example_graph.add_edge(1, 3, 4)
-example_graph.add_edge(1, 5, 9)
-example_graph.add_edge(2, 3, 2)
-example_graph.add_edge(2, 6, 9)
-example_graph.add_edge(2, 4, 8)
-example_graph.add_edge(3, 6, 9)
-example_graph.add_edge(3, 7, 20)
-example_graph.add_edge(4, 6, 7)
-example_graph.add_edge(4, 8, 9)
-example_graph.add_edge(4, 3, 11)
-example_graph.add_edge(4, 9, 10)
-example_graph.add_edge(5, 4, 8)
-example_graph.add_edge(5, 2, 16)
-example_graph.add_edge(5, 9, 18)
-example_graph.add_edge(6, 8, 5)
-example_graph.add_edge(6, 7, 4)
-example_graph.add_edge(7, 9, 9)
-example_graph.add_edge(7, 8, 1)
+example_graph.add_edge(0, 1, 28)
+example_graph.add_edge(0, 5, 10)
+example_graph.add_edge(1, 2, 16)
+example_graph.add_edge(1, 6, 14)
+example_graph.add_edge(2, 3, 12)
+example_graph.add_edge(3, 6, 18)
+example_graph.add_edge(3, 4, 22)
+example_graph.add_edge(4, 6, 24)
+example_graph.add_edge(4, 5, 25)
 
 example_graph.prims_mst()

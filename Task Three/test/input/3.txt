@@ -1,0 +1,7 @@
+example_graph = Graph(5)
+
+example_graph.add_edge(0, 1, 4)
+example_graph.add_edge(0, 3, 3)
+example_graph.add_edge(0, 4, 5)
+example_graph.add_edge(1, 2, 2)
+example_graph.add_edge(2, 3, 1)
