@@ -1,5 +1,6 @@
 import sys
 from queue import PriorityQueue
+from copy import deepcopy
 
 
 class Path:
@@ -82,6 +83,52 @@ class WeightedGraph:
 
         origin.add_edge(target, weight)
         target.add_edge(origin, weight)
+
+    def remove_node(self, node: str):
+        target: Node = self.nodes.get(node)
+
+        for n in self.nodes.values():
+            if n != target:
+                for edge in n.edges:
+                    if edge.to_node == target or edge.from_node == target:
+                        n.edges.remove(edge)
+
+        self.nodes.pop(node)
+
+    def dijkstra(self, from_node, to_node) -> int:
+        from_node: Node = self.nodes.get(from_node)
+        to_node: Node = self.nodes.get(to_node)
+
+        if not from_node or not to_node:
+            raise Exception("There is not Node for finding the shortest path")
+
+        distances = dict()  # key: Node  value:  Integer
+
+        for node in self.nodes.values():
+            distances[node] = sys.maxsize
+
+        distances[from_node] = 0
+
+        visited = set()
+
+        queue = PriorityQueue()
+        queue.put((0, from_node))
+
+        while not queue.empty():
+            current: Node = queue.get()[1]
+            visited.add(current)
+
+            for edge in current.edges:
+                if edge.to_node in visited:
+                    continue
+
+                new_distance = distances.get(current) + edge.weight
+
+                if new_distance < distances.get(edge.to_node):
+                    distances[edge.to_node] = new_distance
+                    queue.put((new_distance, edge.to_node))
+
+        return distances.get(self.nodes.get(to_node))
 
     def get_shortest_path(self, from_node, to_node):
         from_node: Node = self.nodes.get(from_node)
