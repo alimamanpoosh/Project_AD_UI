@@ -16,4 +16,3 @@ if __name__ == '__main__':
     wg.add_edge("d", "c", 1)
 
     WeightedGraph.get_all_shortest_path(wg, "a", "c")
-
